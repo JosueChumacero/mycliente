@@ -1,0 +1,11 @@
+.clear{
+    padding:20px
+}
+.requiere{
+    color: red;
+    font-weight: bolder;
+}
+.main-form{
+    margin: 0 auto;
+    width: 70%;
+}
