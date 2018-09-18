@@ -13,4 +13,9 @@ export class UserService {
   public getUsers(): Observable<UserModel[]> {
     return this.http.get<UserModel[]>('http://localhost:8080/getUsers');
   }
+
+  public deleteUsers(user: UserModel): void {
+    this.http.post('http://localhost:8080/deleteUser', JSON.stringify(user)).subscribe();
+    this.getUsers();
+  }
 }

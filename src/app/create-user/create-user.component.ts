@@ -16,7 +16,11 @@ export class CreateUserComponent implements OnInit {
   private message: String = '';
   private isValid = true;
   constructor(private createUserService: CreateUserService, private router: Router) {
-    this.user = new UserModel();
+    if (sessionStorage.getItem('user')) {
+      this.user = JSON.parse(sessionStorage.getItem('user'));
+    } else {
+      this.user = new UserModel();
+    }
   }
 
   ngOnInit() {
@@ -37,5 +41,6 @@ export class CreateUserComponent implements OnInit {
     } else {
       this.message = 'Los campos con asterisco son obligatorios';
     }
+    sessionStorage.clear();
   }
 }

@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { UserService } from './user.service';
 import { UserModel } from '../model/user.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user',
@@ -14,7 +15,7 @@ export class UserComponent implements OnInit {
 
   private users: Array<UserModel>;
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService, private router: Router) {
   }
 
   ngOnInit() {
@@ -25,5 +26,13 @@ export class UserComponent implements OnInit {
     this.userService.getUsers().subscribe(res => {
       this.users = res;
     });
+  }
+  public editUser(user: UserModel): void {
+    sessionStorage.setItem('user', JSON.stringify(user));
+    this.router.navigate(['/crearteUserComponent']);
+  }
+
+  public deleteUser(user: UserModel): void {
+    this.userService.deleteUsers(user);
   }
 }
